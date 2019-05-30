@@ -6,12 +6,18 @@ function movies(){
 }
 var is_log = false;
 function log_in(){
-    var login = document.getElementById("login").value;
-    var password = document.getElementById("password").value;
-    var data = {login, password};
+    var login = document.getElementById("login");
+    var password = document.getElementById("password");
     console.log("Kliknięto Logowanie");
         return fetch('/login', {
             method: 'POST',
-            body: JSON.stringify(data)
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+              },
+            body: JSON.stringify({
+                login: login.value,
+                password: password.value
+            })
         }).then(function (res) { is_log = res }).then(console.log(is_log))
 }

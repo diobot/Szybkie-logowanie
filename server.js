@@ -13,6 +13,7 @@ console.log("Server works...")
 console.log(users)
 app.use('/', router);
 app.listen(process.env.port || 2000);
+app.use(bodyParser.json());
 
 /////////////////// Ładowanie Strony /////////////////////
 
@@ -31,12 +32,12 @@ router.get('/style.css', function(req, res){
 router.post('/login', (req, res) => {
         console.log(req.body);
         console.log(users);
-        // porownuje users z podeslanym body i decyduje, czy uzytkownik jest zalogowany
         const { login, password } = req.body;
-        if(users[login]===password){
-        res.send("true");
-        }else{
-            res.send("false", console.log("Nie udało się."))
-        }
+        // if(users[login]===password){
+        // res.send("true");
+        // }else{
+        //     res.send("false")
+        // }
+        res.json({ isLoggedIn: users[login] === password });
     });
 
